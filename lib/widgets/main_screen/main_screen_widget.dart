@@ -14,7 +14,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   //final List<String> _listTap =['Новости','Фильмы','Сериалы'];
 
-  static const List<Widget> _widgetOptions = [
+  static final List<Widget> _widgetOptions = [
     Text('Новости'),
     MovieListWidget(),
     Text('Сериалы'),
