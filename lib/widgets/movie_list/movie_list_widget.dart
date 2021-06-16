@@ -53,8 +53,6 @@ class MovieListWidget extends StatelessWidget {
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
-
-
   ];
 
   MovieListWidget({Key? key}) : super(key: key);
@@ -64,6 +62,7 @@ class MovieListWidget extends StatelessWidget {
     return Stack(
       children: [
         ListView.builder(
+          padding: EdgeInsets.only(top: 70),
           itemCount: _movies.length,
             itemExtent: 163,
             itemBuilder: (BuildContext context, int index){
