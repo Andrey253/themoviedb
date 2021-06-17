@@ -12,13 +12,6 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
-  //final List<String> _listTap =['Новости','Фильмы','Сериалы'];
-
-  static final List<Widget> _widgetOptions = [
-    Text('Новости'),
-    MovieListWidget(),
-    Text('Сериалы'),
-    ];
 
   void onSelectesTap(int index){
     if (_selectedTab == index) return;
@@ -31,7 +24,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     return Scaffold(
       appBar: AppBar(title: Text('TMDB'),
       backgroundColor: AppColors.mainDarkBlue,),
-      body: Center( child: _widgetOptions[_selectedTab],),
+      body: IndexedStack(
+        index: _selectedTab,
+        children: [
+          Text('Новости'),
+          MovieListWidget(),
+          Text('Сериалы'),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         items: [

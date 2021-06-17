@@ -16,8 +16,16 @@ class Movie{
   });
 }
 
-class MovieListWidget extends StatelessWidget {
+class MovieListWidget extends StatefulWidget {
 
+
+  MovieListWidget({Key? key}) : super(key: key);
+
+  @override
+  _MovieListWidgetState createState() => _MovieListWidgetState();
+}
+
+class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
   Movie(
     imageName: 'images/movie.jpg',
@@ -53,9 +61,46 @@ class MovieListWidget extends StatelessWidget {
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
+    Movie(
+      imageName: 'images/movie.jpg',
+      title: 'Смертельная битва 7',
+      time: 'April 7, 2021',
+      description: 'Описание №1',
+    ),
+    Movie(
+      imageName: 'images/movie.jpg',
+      title: 'Смертельная битва 8',
+      time: 'April 7, 2021',
+      description: 'Описание №1',
+    ),
+    Movie(
+      imageName: 'images/movie.jpg',
+      title: 'Смертельная битва 9',
+      time: 'April 7, 2021',
+      description: 'Описание №1',
+    ),
   ];
 
-  MovieListWidget({Key? key}) : super(key: key);
+  var _filtredMovies = <Movie>[];
+
+  final _searchController  = TextEditingController();
+
+  void _searchMovies(){
+    final query = _searchController.text;
+    if (query.isNotEmpty){
+      _filtredMovies = _movies.where((Movie movie) {
+        return movie.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else _filtredMovies = _movies;
+    setState(() {});
+  }
+  @override
+  void initState(){
+    super.initState();
+    _searchController.addListener(_searchMovies);
+    //_searchMovies();
+    _filtredMovies = _movies;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +108,11 @@ class MovieListWidget extends StatelessWidget {
       children: [
         ListView.builder(
           padding: EdgeInsets.only(top: 70),
-          itemCount: _movies.length,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemCount: _filtredMovies.length,
             itemExtent: 163,
             itemBuilder: (BuildContext context, int index){
-            final movie = _movies[index];
+            final movie = _filtredMovies[index];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Stack(
@@ -128,6 +174,7 @@ class MovieListWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextField(
+            controller: _searchController,
             decoration: InputDecoration(
               labelText: 'Поиск',
               filled: true,
