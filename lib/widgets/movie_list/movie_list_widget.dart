@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Movie{
+  final int id;
   final String imageName;
   final String title;
   final String time;
   final String description;
 
   Movie({
+    required this.id,
     required this.imageName,
     required this.title,
     required this.time,
@@ -28,52 +30,61 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
   Movie(
+    id: 1,
     imageName: 'images/movie.jpg',
     title: 'Смертельная битва',
   time: 'April 7, 2021',
   description: 'Описание №1',
   ),  Movie(
+      id: 2,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 2',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 3,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 3',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),  Movie(
+      id: 4,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 4',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 5,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 5',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 6,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 6',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 7,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 7',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 8,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 8',
       time: 'April 7, 2021',
       description: 'Описание №1',
     ),
     Movie(
+      id: 9,
       imageName: 'images/movie.jpg',
       title: 'Смертельная битва 9',
       time: 'April 7, 2021',
@@ -163,7 +174,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     onTap: (){
-                      print(index);
+                      _onMovieTap(index);
                     },
                   ),
                 )
@@ -181,10 +192,15 @@ class _MovieListWidgetState extends State<MovieListWidget> {
               fillColor: Colors.white.withAlpha(235),
               border: OutlineInputBorder(),
             ),
-
           ),
-        ),
-      ],
+        ),],
     );
+  }
+
+  void _onMovieTap(int index) {
+    final id = _movies[index].id;
+    Navigator.of(context).pushNamed('/main_screen/movie_datails',
+        arguments: id);
+    //print(index);
   }
 }
